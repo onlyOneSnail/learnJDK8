@@ -15,6 +15,10 @@ public class Person {
         this.name = name;
     }
 
+    public Person(Integer age) {
+        this.age = age;
+    }
+
     public Person(String name, Integer age) {
         this.name = name;
         this.age = age;

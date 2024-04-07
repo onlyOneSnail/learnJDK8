@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class streamMethodDemo {
@@ -148,6 +150,62 @@ public class streamMethodDemo {
 
         Optional<Integer> any = Stream.of(22, 53, 24, 75, 22).findAny();
         System.out.println(any.get());
+
+    }
+
+    @Test
+    public void test10() {
+        //max min
+        //max就是取排序后的最后一个元素
+        Optional<Integer> max = Stream.of(22, 53, 24, 75, 22, 3).max((a, b) -> {
+            return a - b;
+        });
+        System.out.println(max.get());
+        //min就是取排序后的第一个元素
+        Optional<Integer> min = Stream.of(22, 53, 24, 75, 22, 3).min((a, b) -> a - b);
+
+        System.out.println(min.get());
+
+    }
+
+    @Test
+    public void test11() {
+        //reduce
+        Integer reduce1 = Stream.of(22, 53, 24, 75, 22, 3).reduce(5, (a, b) -> {
+            System.out.println("a = " + a + " b = " + b);
+            return a + b;
+        });
+    }
+
+    @Test
+    public void test12() {
+        //reduce + map
+        Integer reduce = Stream.of(new Person("as", 5), new Person("kk", 7),
+                new Person("kvsk", 1), new Person("kfdsk", 10))
+                .map(Person::getAge).reduce(0, Integer::sum);
+        System.out.println(reduce);
+    }
+
+    @Test
+    public void test13() {
+        //maptoint包装类转基础类
+        Stream<Integer> integerStream = Stream.of(22, 53, 24, 75, 22, 3);
+        IntStream intStream = integerStream.mapToInt((Integer a) -> {
+            return a.intValue();
+        });
+        IntStream.rangeClosed(1,10).boxed().forEach(System.out::println);
+    }
+
+    @Test
+    public void test14() {
+        //concat
+        Stream<Integer> stream = Stream.of(22, 53, 24, 75, 22, 3).filter((Integer a) -> {
+            return a > 10;
+        }).limit(3);
+        Stream<Integer> stream1 = Stream.of(2, 3, 24, 5, 22, 33).filter((Integer a) -> {
+            return a.toString().contains("2");
+        });
+        Stream.concat(stream,stream1).map(Person::new).forEach(System.out::println);
 
     }
 

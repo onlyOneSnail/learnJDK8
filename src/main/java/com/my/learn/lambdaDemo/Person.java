@@ -2,13 +2,13 @@ package com.my.learn.lambdaDemo;
 
 import java.util.Objects;
 
-public class Person {
+public class Person implements Comparable<Person>{
     private String name;
     private Integer age;
     private String address;
 
     public Person() {
-        System.out.println("这是无参数的构造器");
+
     }
 
     public Person(String name) {
@@ -22,7 +22,12 @@ public class Person {
     public Person(String name, Integer age) {
         this.name = name;
         this.age = age;
-        System.out.println("这是有参数的构造器");
+    }
+
+    public Person(String name, Integer age, String address) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
     }
 
     public String getAddress() {
@@ -68,5 +73,10 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(name, age);
+    }
+
+    @Override
+    public int compareTo(Person person) {
+        return this.getAge() - person.getAge();
     }
 }

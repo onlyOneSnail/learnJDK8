@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class streamDemo01 {
+public class StreamDemo01 {
     @Test
     public void test() {
         //获取集合中姓张并且长度为三的并打印输出

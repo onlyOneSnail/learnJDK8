@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class streamMethodDemo {
+public class StreamMethodDemo {
     @Test
     public void testForEach() {
         //forEach
@@ -58,7 +57,7 @@ public class streamMethodDemo {
         System.out.println("--------------------------------");
         arrayList.stream().filter(e -> e.length() > 2).forEach(System.out::println);
         System.out.println("--------------------------------");
-        arrayList.stream().filter(streamMethodDemo::getThree).forEach(System.out::println);
+        arrayList.stream().filter(StreamMethodDemo::getThree).forEach(System.out::println);
     }
 
     @Test

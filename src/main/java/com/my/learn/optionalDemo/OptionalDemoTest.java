@@ -23,4 +23,16 @@ public class OptionalDemoTest {
         System.out.println("---");
         return "ass";
     }
+
+    @Test
+    public void testGet(){
+        String s = null;
+        Optional<String> o = Optional.ofNullable(s);
+        o.ifPresentOrElse((nn) -> {
+            System.out.println(nn + "sr");
+        }, () -> {
+            System.out.println("ssssss" + s);
+        });
+
+    }
 }

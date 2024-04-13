@@ -2,13 +2,19 @@ package com.my.learn.datedemo;
 
 import org.junit.Test;
 
+import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 
 public class LocalDateDemo {
     @Test
@@ -84,5 +90,33 @@ public class LocalDateDemo {
         System.out.println(between1.getMonths());
         int years = between1.getYears();
         System.out.println(years);
+    }
+
+    @Test
+    public void testZoneId(){
+//        ZoneId.getAvailableZoneIds().forEach(e -> System.out.println(e));
+//        ZoneId.getAvailableZoneIds().forEach(System.out::println);
+        System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Shanghai")).toString());
+        System.out.println(ZonedDateTime.now(ZoneId.of("America/Marigot")).toString());
+        ZonedDateTime now = ZonedDateTime.now(Clock.system(ZoneId.of("Asia/Shanghai")));
+        System.out.println(now.toString());
+
+    }
+
+    @Test
+    public void testAjust(){
+        LocalDate now = LocalDate.now(ZoneId.of("Asia/Shanghai"));
+        TemporalAdjuster temporalAdjuster = TemporalAdjusters.firstDayOfMonth();
+        LocalDate with = now.with(temporalAdjuster);
+        System.out.println(with.toString());
+        LocalDate localDateTime = now.with(new TemporalAdjuster() {
+            @Override
+            public Temporal adjustInto(Temporal temporal) {
+                LocalDate localDate = (LocalDate) temporal;
+                LocalDate localDate1 = localDate.plusYears(1).withDayOfMonth(3);
+                return localDate1;
+            }
+        });
+        System.out.println(localDateTime.toString());
     }
 }
